@@ -1,95 +1,112 @@
-// Espera a que todo el contenido de la página (HTML) se cargue
+// Espera a que todo el contenido de la página se cargue
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- SECCIÓN DE LA CALCULADORA ---
     
-    // 1. Obtenemos los elementos del HTML que necesitamos
+    // Obtenemos los elementos de la calculadora
     const kwhInput = document.getElementById('kwh-input');
-    const ahorroOutput = document.getElementById('ahorro-output');
-    const emisionesOutput = document.getElementById('emisiones-output');
-    const donutChart = document.getElementById('donut-chart');
-    const ahorroPercent = document.getElementById('ahorro-percent');
+    
+    // ¡IMPORTANTE! 
+    // Solo ejecutamos el código de la calculadora si el input existe en esta página
+    if (kwhInput) {
+        // Obtenemos el resto de elementos
+        const ahorroOutput = document.getElementById('ahorro-output');
+        const emisionesOutput = document.getElementById('emisiones-output');
+        const donutChart = document.getElementById('donut-chart');
+        const ahorroPercent = document.getElementById('ahorro-percent');
 
-    // 2. Definimos nuestras "constantes" (suposiciones)
-    // ¡Puedes cambiar estos valores!
-    const PRECIO_KWH = 2.5; // Suposición: $2.5 MXN por Kwh (tarifa doméstica)
-    const EMISIONES_KWH = 0.45; // Suposición: 0.45 kg de CO2 por Kwh
-    const PORCENTAJE_AHORRO_SOLAR = 0.85; // Suposición: Los paneles cubren el 85% de tu consumo
+        // Constantes (ajústalas si es necesario)
+        const PRECIO_KWH = 2.5; 
+        const EMISIONES_KWH = 0.45;
+        const PORCENTAJE_AHORRO_SOLAR = 0.85;
 
-    // 3. Creamos la función que hace los cálculos
-    function actualizarCalculadora() {
-        // Obtenemos el valor del input, o 0 si está vacío
-        const consumoMensualKwh = parseFloat(kwhInput.value) || 0;
+        // Función que hace los cálculos
+        function actualizarCalculadora() {
+            const consumoMensualKwh = parseFloat(kwhInput.value) || 0;
+            const ahorroEnKwh = consumoMensualKwh * PORCENTAJE_AHORRO_SOLAR;
+            const ahorroEnDinero = ahorroEnKwh * PRECIO_KWH;
+            const reduccionEmisiones = ahorroEnKwh * EMISIONES_KWH;
+            const consumoRestanteKwh = consumoMensualKwh * (1 - PORCENTAJE_AHORRO_SOLAR);
 
-        // Calculamos el ahorro
-        const ahorroEnKwh = consumoMensualKwh * PORCENTAJE_AHORRO_SOLAR;
-        const ahorroEnDinero = ahorroEnKwh * PRECIO_KWH;
+            // Actualizamos el texto
+            ahorroOutput.textContent = `$${ahorroEnDinero.toFixed(2)} MXN`;
+            emisionesOutput.textContent = `${reduccionEmisiones.toFixed(2)} kg CO2`;
 
-        // Calculamos la reducción de emisiones
-        const reduccionEmisiones = ahorroEnKwh * EMISIONES_KWH;
-        
-        // Calculamos el consumo restante (el que no cubren los paneles)
-        const consumoRestanteKwh = consumoMensualKwh * (1 - PORCENTAJE_AHORRO_SOLAR);
+            // Actualizamos el gráfico
+            let porcentajeAhorrado = 0;
+            let porcentajeRestante = 100;
+            
+            if (consumoMensualKwh > 0) {
+                porcentajeAhorrado = PORCENTAJE_AHORRO_SOLAR * 100;
+                porcentajeRestante = (1 - PORCENTAJE_AHORRO_SOLAR) * 100;
+            }
 
-        // 4. Actualizamos el texto en la página
-        ahorroOutput.textContent = `$${ahorroEnDinero.toFixed(2)} MXN`;
-        emisionesOutput.textContent = `${reduccionEmisiones.toFixed(2)} kg CO2`;
-
-        // 5. Actualizamos el gráfico de dona
-        let porcentajeAhorrado = 0;
-        let porcentajeRestante = 100;
-        
-        if (consumoMensualKwh > 0) {
-            porcentajeAhorrado = PORCENTAJE_AHORRO_SOLAR * 100;
-            porcentajeRestante = (1 - PORCENTAJE_AHORRO_SOLAR) * 100;
+            ahorroPercent.textContent = `${porcentajeAhorrado.toFixed(0)}%`;
+            donutChart.style.background = 
+                `conic-gradient(#F44336 0% ${porcentajeRestante}%, #4CAF50 ${porcentajeRestante}% 100%)`;
         }
 
-        // Actualizamos el texto del centro del gráfico
-        ahorroPercent.textContent = `${porcentajeAhorrado.toFixed(0)}%`;
+        // Hacemos que la función se ejecute cada vez que el usuario escribe
+        kwhInput.addEventListener('input', actualizarCalculadora);
         
-        // Actualizamos el fondo del gráfico (el gradiente cónico)
-        // El rojo (consumo) va de 0% hasta el porcentaje restante
-        // El verde (ahorro) va desde el porcentaje restante hasta el 100%
-        donutChart.style.background = 
-            `conic-gradient(#F44336 0% ${porcentajeRestante}%, #4CAF50 ${porcentajeRestante}% 100%)`;
-    }
-
-    // 6. Hacemos que la función se ejecute cada vez que el usuario escribe
-    kwhInput.addEventListener('input', actualizarCalculadora);
+        // Llamamos la función una vez al cargar para que el gráfico inicie en 0%
+        actualizarCalculadora();
+    } // Fin del 'if (kwhInput)'
 
 
     // --- SECCIÓN DEL MENÚ DE NAVEGACIÓN ACTIVO ---
-
-    // Esto resalta el link del menú de la sección que estás viendo
-    const sections = document.querySelectorAll('section');
+    
+    // Este código nuevo resalta el enlace de la página actual
     const navLinks = document.querySelectorAll('header nav ul li a');
+    
+    // Obtenemos el nombre del archivo de la página actual (ej: "galeria.html")
+    let currentPage = window.location.pathname.split('/').pop();
+    
+    // Si la página está vacía (ej. "mi-sitio.com/"), es 'index.html'
+    if (currentPage === '') {
+        currentPage = 'index.html';
+    }
 
-    const options = {
-        root: null, // Observa en relación al viewport
-        threshold: 0.5, // Se activa cuando el 50% de la sección es visible
-        rootMargin: '-70px 0px 0px 0px' // Compensa el header fijo
-    };
+    navLinks.forEach(link => {
+        const linkPage = link.getAttribute('href');
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Quita la clase 'active' de todos los links
-                navLinks.forEach(link => link.classList.remove('active'));
-                
-                // Añade 'active' solo al link que corresponde a la sección visible
-                const id = entry.target.getAttribute('id');
-                const activeLink = document.querySelector(`header nav ul li a[href="#${id}"]`);
-                
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                }
+        // Si el 'href' del enlace coincide con la página actual, le añadimos la clase 'active'
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+        }
+    });
+
+    // --- FUNCIÓN DE AUDIO EN GALERÍA ---
+    
+    // Solo si estamos en la página de la galería
+    if (currentPage === 'galeria.html') {
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        let currentAudio = null; // Para detener el audio anterior si hay uno
+
+        galleryItems.forEach(item => {
+            const audioPath = item.getAttribute('data-audio'); // Obtenemos la ruta del audio
+
+            if (audioPath) { // Solo si este item tiene un audio asociado
+                item.style.cursor = 'pointer'; // Para indicar que es clickeable
+
+                item.addEventListener('click', () => {
+                    // Si hay un audio sonando, lo detenemos
+                    if (currentAudio) {
+                        currentAudio.pause();
+                        currentAudio.currentTime = 0; // Reinicia el audio al principio
+                    }
+
+                    // Creamos un nuevo objeto de Audio con la ruta
+                    const audio = new Audio(audioPath);
+                    audio.volume = 0.7; // Ajusta el volumen (0.0 a 1.0)
+                    audio.play().catch(error => {
+                        console.log("Error al intentar reproducir el audio:", error);
+                    });
+
+                    currentAudio = audio; // Guardamos una referencia al audio actual
+                });
             }
         });
-    }, options);
-
-    // Le decimos al observador que vigile todas nuestras secciones
-    sections.forEach(section => {
-        observer.observe(section);
-    });
+    } // Fin del 'if (currentPage === 'galeria.html')'
 
 });
