@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - Energía Asequible</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="container">
+                <a href="index.html" class="nav-logo">ODS 7</a>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="galeria.html">Galería</a></li>
+                    <li><a href="calculadora.html">Calculadora</a></li>
+                    <li><a href="devs.html">Devs</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="galeria">
+            <div class="container">
+                <h2>Galería de Energías Limpias</h2>
+                <div class="gallery-grid">
+                    
+                    <div class="gallery-item" data-audio="audios/viento.mp3">
+                        <img src="X:\pagina web\fotos\eolica.jpg" alt="Turbinas de energía eólica en un campo">
+                        <p>Energía Eólica</p>
+                    </div>
+                    
+                    <div class="gallery-item" data-audio="audios/agua.mp3">
+                        <img src="X:\pagina web\fotos\hidroelectrica.jpg" alt="Presa hidroeléctrica soltando agua">
+                        <p>Energía Hidroeléctrica</p>
+                    </div>
+                    
+                    <div class="gallery-item" data-audio="audios/tierra.mp3">
+                        <img src="X:\pagina web\fotos\geotermica.png" alt="Planta de energía geotérmica con vapor">
+                        <p>Energía Geotérmica</p>
+                    </div>
+
+                    <div class="gallery-item" data-audio="audios/mar.mp3">
+                        <img src="X:\pagina web\fotos\mareomotriz.png" alt="Generadores de energía mareomotriz en el océano">
+                        <p>Energía Mareomotriz</p>
+                    </div>
+
+                    <div class="gallery-item">
+                        <iframe 
+                            src="https://www.youtube.com/embed/fK28-gAGfD8" 
+                            title="YouTube video player" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                        <p>Video Explicativo (sin audio al clic)</p>
+                    </div>
+
+                    <div class="gallery-item" data-audio="audios/sol.mp3">
+                        <img src="img/solar.jpg" alt="Paneles solares instalados en un techo">
+                        <p>Instalación Solar</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Proyecto Multimedia - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

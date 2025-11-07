@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora - Energía Asequible</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="container">
+                <a href="index.html" class="nav-logo">ODS 7</a>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="galeria.html">Galería</a></li>
+                    <li><a href="calculadora.html">Calculadora</a></li>
+                    <li><a href="devs.html">Devs</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="calculadora">
+            <div class="container">
+                <h2>Estimación de Ahorro con Paneles Solares</h2>
+                <div class="calculator-layout">
+                    <div class="calculator-controls">
+                        <label for="kwh-input">Consumo mensual (Kwh):</label>
+                        <input type="number" id="kwh-input" placeholder="Ej: 250" min="0">
+                        
+                        <div class="results">
+                            <h3>Resultados Estimados:</h3>
+                            <p>Ahorro mensual: <span id="ahorro-output">$0.00</span></p>
+                            <p>Reducción de emisiones: <span id="emisiones-output">0 kg CO2</span></p>
+                        </div>
+                    </div>
+                    <div class="calculator-chart">
+                        <div id="donut-chart">
+                            <div class="chart-center">
+                                <span id="ahorro-percent">0%</span>
+                                <small>Ahorrado</small>
+                            </div>
+                        </div>
+                        <div class="chart-legend">
+                            <div><span class="legend-color" style="background-color: #4CAF50;"></span> Energía Ahorrada</div>
+                            <div><span class="legend-color" style="background-color: #F44336;"></span> Consumo Restante</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Proyecto Multimedia - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
