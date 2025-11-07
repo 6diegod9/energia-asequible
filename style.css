@@ -356,3 +356,32 @@ footer {
         text-align: left; 
     }
 }
+/* ================================================= */
+/* ====         NUEVO ESTILO PARA BANNER         ==== */
+/* ================================================= */
+
+.banner-container {
+    width: 100%;
+    /* Define una altura máxima para que el banner no sea gigante */
+    max-height: 300px; 
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde */
+    
+    /* Esto es para que el banner no esté pegado al menú */
+    margin-top: 75px; /* Ajusta esto si tu header cambia de tamaño */
+}
+
+/* Como tu header es 'sticky', si no ponemos el margin-top de arriba, 
+  el banner se esconderá detrás de él.
+  PERO, si NO quieres que el header sea 'sticky' (fijo al hacer scroll),
+  puedes hacer esto:
+  1. En el CSS, busca 'header' y borra la línea: position: sticky;
+  2. Borra el 'margin-top: 75px;' de la regla .banner-container de arriba.
+*/
+
+.banner-container img {
+    width: 100%;
+    height: 100%;
+    /* 'cover' asegura que la imagen llene el espacio, recortándose si es necesario */
+    object-fit: cover; 
+    display: block; /* Elimina un pequeño espacio fantasma debajo de la imagen */
+}
