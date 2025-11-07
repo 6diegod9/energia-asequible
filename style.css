@@ -365,9 +365,7 @@ footer {
     /* Define una altura máxima para que el banner no sea gigante */
     max-height: 300px; 
     overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde */
-    
-    /* Esto es para que el banner no esté pegado al menú */
-    margin-top: 75px; /* Ajusta esto si tu header cambia de tamaño */
+   
 }
 
 /* Como tu header es 'sticky', si no ponemos el margin-top de arriba, 
@@ -385,3 +383,4 @@ footer {
     object-fit: cover; 
     display: block; /* Elimina un pequeño espacio fantasma debajo de la imagen */
 }
+
