@@ -321,30 +321,38 @@ footer {
     text-align: center;
     padding: 20px 0;
     margin-top: 30px;
-
-}
-/* ======== NUEVOS ESTILOS PARA IMÁGENES DE CONTENIDO ======== */
-.content-image {
-    text-align: center; /* Centra la imagen */
-    margin-top: 40px;   /* Da espacio entre el texto y la imagen */
-    padding-bottom: 20px;
 }
 
-.content-image img {
-    max-width: 70%; /* La imagen no ocupará más del 70% del ancho */
-    height: auto;
-    border-radius: 8px; /* Mantiene tus bordes redondeados */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Añade una sombra sutil */
+/* ================================================= */
+/* ==== NUEVOS ESTILOS PARA index.html (INICIO) ==== */
+/* ================================================= */
+
+/* ======== ESTILO PARA INVERTIR EL HERO-LAYOUT ======== */
+.hero-layout.reverse {
+    flex-direction: row-reverse; /* Invierte el orden de los elementos */
 }
 
-/* Ajuste para que los h2 en las nuevas secciones estén centrados */
-#contexto-mexicano h2,
-#alternativa-hidalguense h2 {
-    text-align: center;
+/* ======== AJUSTE PARA PÁRRAFOS JUSTIFICADOS ======== */
+/* Esto hará que tu texto se vea más ordenado en todas las secciones */
+.hero-info p {
+    text-align: justify;
 }
 
-/* Ajuste para que el texto en las nuevas secciones esté justificado */
-#contexto-mexicano p,
-#alternativa-hidalguense p {
-    text-align: justify; /* Hace que el texto se vea más ordenado */
+/* ======== AJUSTE PARA MÓVILES ======== */
+/* Esto asegura que en pantallas pequeñas, todo se apile correctamente */
+@media (max-width: 768px) {
+    .hero-layout, 
+    .hero-layout.reverse {
+        flex-direction: column; /* Apila imagen y texto verticalmente */
+        text-align: center;
+    }
+    
+    .hero-info h2 {
+        text-align: center; /* Centra los títulos en móvil */
+    }
+
+    .hero-info p {
+        /* En móvil, justificado se ve mal. Lo dejamos a la izquierda. */
+        text-align: left; 
+    }
 }
