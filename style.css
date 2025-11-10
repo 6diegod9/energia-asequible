@@ -499,7 +499,7 @@ body.dark-mode {
     --color-fondo-alterno: #2a2a2a;
     
     /* CORRECCIÓN: Hacemos el header oscuro en modo oscuro */
-    --color-header: #10094D;
+    --color-header: #000000;
 }
 
 /* 2. Arreglamos los elementos que no dependen de variables */
@@ -533,5 +533,6 @@ body.dark-mode .chart-center {
         color: #e0e0e0;
     }
 }
+
 
 
