@@ -508,3 +508,46 @@ footer {
     }
 }
 
+
+/* ================================================= */
+/* ====         MODO OSCURO AUTOMÁTICO         ==== */
+/* ================================================= */
+
+@media (prefers-color-scheme: dark) {
+    
+    /* 1. Invertimos los colores principales de tu :root */
+    :root {
+        --color-primario: #4CAF50; /* Hacemos el verde más brillante para que se lea */
+        --color-secundario: #2E7D32; /* (Este se queda igual o puede oscurecerse) */
+        
+        --color-texto: #e0e0e0;          /* Texto se vuelve claro */
+        --color-fondo: #1e1e1e;          /* Fondo se vuelve oscuro */
+        --color-fondo-alterno: #2a2a2a; /* Fondo alterno se vuelve un gris oscuro */
+    }
+
+    /* 2. Arreglamos elementos que tenían colores fijos (blancos) */
+    
+    /* Bordes claros que se verían mal en fondo oscuro */
+    .gallery-item {
+        border: 1px solid #444; /* Borde gris oscuro */
+    }
+    .results {
+        border: 1px solid #444;
+    }
+
+    /* Estilos del formulario de la calculadora */
+    .calculator-controls input {
+        background-color: #2a2a2a; /* Fondo oscuro para el input */
+        border: 2px solid #555;
+        color: #e0e0e0; /* Color del texto que escribes */
+    }
+
+    /* Fondo del menú de hamburguesa en móvil (que era blanco) */
+    #nav-menu {
+        background-color: rgba(30, 30, 30, 0.95); /* Fondo oscuro traslúcido */
+    }
+    
+    /* Tu pie de página (footer) ya es oscuro, 
+       así que no necesitamos tocarlo. ¡Perfecto!
+    */
+}
