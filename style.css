@@ -500,6 +500,10 @@ body.dark-mode {
     
     /* CORRECCIÓN: Hacemos el header oscuro en modo oscuro */
     --color-header: #000000;
+    header nav ul li a {
+        background-color: transparent; /* <-- Esto quita el fondo gris */
+        color: #FFFFFF; /* <-- Esto pone el texto en blanco */
+    }
 }
 
 /* 2. Arreglamos los elementos que no dependen de variables */
@@ -519,7 +523,7 @@ body.dark-mode #nav-menu {
 }
 body.dark-mode header nav ul li a.active {
     background-color: var(--color-primario);
-    color: white;
+    color: #FFFFFF;
 }
 body.dark-mode .chart-center {
     background: var(--color-fondo); /* Arreglo para el gráfico */
@@ -533,6 +537,7 @@ body.dark-mode .chart-center {
         color: #e0e0e0;
     }
 }
+
 
 
 
