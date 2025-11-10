@@ -384,3 +384,19 @@ footer {
     display: block; /* Elimina un pequeño espacio fantasma debajo de la imagen */
 }
 
+
+/* ======== ESTILO PARA DESCRIPCIONES DE GALERÍA ======== */
+.gallery-item p {
+    font-weight: 600; /* El título (el primer <p>) será negrita */
+    font-size: 1.1rem;
+    padding: 15px 15px 5px 15px; /* Menos padding abajo */
+}
+
+/* Estilo para los párrafos que *siguen* al primero */
+.gallery-item p + p {
+    font-weight: normal; /* Texto normal, no negrita */
+    font-size: 0.9rem; /* Letra más pequeña */
+    color: #666; /* Un gris sutil */
+    padding: 0 15px 15px 15px; /* Padding solo abajo */
+}
+
