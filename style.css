@@ -7,7 +7,7 @@
     --color-fondo-alterno: #f4f7f6;
     
     /* TU NUEVA VARIABLE PARA EL HEADER (pon el color que te guste) */
-    --color-header: #222222; 
+    --color-header: #FFFFFF; 
 }
 
 * {
@@ -533,3 +533,4 @@ body.dark-mode .chart-center {
         color: #e0e0e0;
     }
 }
+
