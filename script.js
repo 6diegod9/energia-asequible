@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const ahorroPercent = document.getElementById('ahorro-percent');
 
         // Constantes (ajústalas si es necesario)
-        const PRECIO_KWH = 2.5; 
+        const PRECIO_KWH = 4.2; 
         const EMISIONES_KWH = 0.45;
-        const PORCENTAJE_AHORRO_SOLAR = 0.85;
+        const PORCENTAJE_AHORRO_SOLAR = 0.95;
 
         // Función que hace los cálculos
         function actualizarCalculadora() {
@@ -110,3 +110,4 @@ document.addEventListener('DOMContentLoaded', () => {
     } // Fin del 'if (currentPage === 'galeria.html')'
 
 });
+
