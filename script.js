@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ahorroPercent = document.getElementById('ahorro-percent');
 
         // Constantes (ajústalas si es necesario)
+        // (Estos son los valores mejorados que investigamos)
         const PRECIO_KWH = 4.2; 
         const EMISIONES_KWH = 0.45;
         const PORCENTAJE_AHORRO_SOLAR = 0.95;
@@ -56,21 +57,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- SECCIÓN DEL MENÚ DE NAVEGACIÓN ACTIVO ---
     
-    // Este código nuevo resalta el enlace de la página actual
     const navLinks = document.querySelectorAll('header nav ul li a');
-    
-    // Obtenemos el nombre del archivo de la página actual (ej: "galeria.html")
     let currentPage = window.location.pathname.split('/').pop();
     
-    // Si la página está vacía (ej. "mi-sitio.com/"), es 'index.html'
     if (currentPage === '') {
         currentPage = 'index.html';
     }
 
     navLinks.forEach(link => {
         const linkPage = link.getAttribute('href');
-
-        // Si el 'href' del enlace coincide con la página actual, le añadimos la clase 'active'
         if (linkPage === currentPage) {
             link.classList.add('active');
         }
@@ -78,36 +73,48 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- FUNCIÓN DE AUDIO EN GALERÍA ---
     
-    // Solo si estamos en la página de la galería
     if (currentPage === 'galeria.html') {
         const galleryItems = document.querySelectorAll('.gallery-item');
-        let currentAudio = null; // Para detener el audio anterior si hay uno
+        let currentAudio = null; 
 
         galleryItems.forEach(item => {
-            const audioPath = item.getAttribute('data-audio'); // Obtenemos la ruta del audio
-
-            if (audioPath) { // Solo si este item tiene un audio asociado
-                item.style.cursor = 'pointer'; // Para indicar que es clickeable
-
+            const audioPath = item.getAttribute('data-audio'); 
+            if (audioPath) { 
+                item.style.cursor = 'pointer'; 
                 item.addEventListener('click', () => {
-                    // Si hay un audio sonando, lo detenemos
                     if (currentAudio) {
                         currentAudio.pause();
-                        currentAudio.currentTime = 0; // Reinicia el audio al principio
+                        currentAudio.currentTime = 0; 
                     }
-
-                    // Creamos un nuevo objeto de Audio con la ruta
                     const audio = new Audio(audioPath);
-                    audio.volume = 0.7; // Ajusta el volumen (0.0 a 1.0)
+                    audio.volume = 0.7; 
                     audio.play().catch(error => {
                         console.log("Error al intentar reproducir el audio:", error);
                     });
-
-                    currentAudio = audio; // Guardamos una referencia al audio actual
+                    currentAudio = audio; 
                 });
             }
         });
     } // Fin del 'if (currentPage === 'galeria.html')'
 
-});
+    
+    // ===================================================
+    // ==== ¡NUEVO CÓDIGO PARA MENÚ HAMBURGUESA! ====
+    // ===================================================
+    
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
 
+    // Verificamos que los elementos existan
+    if (navToggle && navMenu) {
+        
+        navToggle.addEventListener('click', () => {
+            // Alterna (pone y quita) la clase 'nav-menu-visible' en el menú (ul)
+            navMenu.classList.toggle('nav-menu-visible');
+            
+            // Alterna la clase 'nav-open' en el body (para la animación del botón a 'X')
+            document.body.classList.toggle('nav-open');
+        });
+    } // Fin del 'if (navToggle && navMenu)'
+
+}); // <-- ESTE ES EL CIERRE DEL 'DOMContentLoaded'
