@@ -500,10 +500,6 @@ body.dark-mode {
     
     /* CORRECCIÓN: Hacemos el header oscuro en modo oscuro */
     --color-header: #000000;
-    header nav ul li a {
-        background-color: transparent; /* <-- Esto quita el fondo gris */
-        color: #FFFFFF; /* <-- Esto pone el texto en blanco */
-    }
 }
 
 /* 2. Arreglamos los elementos que no dependen de variables */
@@ -528,6 +524,10 @@ body.dark-mode header nav ul li a.active {
 body.dark-mode .chart-center {
     background: var(--color-fondo); /* Arreglo para el gráfico */
 }
+header nav ul li a {
+        background-color: transparent; /* <-- Esto quita el fondo gris */
+        color: #FFFFFF; /* <-- Esto pone el texto en blanco */
+    }
 
 /* En modo oscuro, el hover del menú móvil es diferente */
 @media (max-width: 768px) {
@@ -537,6 +537,7 @@ body.dark-mode .chart-center {
         color: #e0e0e0;
     }
 }
+
 
 
 
