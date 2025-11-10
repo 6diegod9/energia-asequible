@@ -400,3 +400,111 @@ footer {
     padding: 0 15px 15px 15px; /* Padding solo abajo */
 }
 
+/* ================================================= */
+/* ====     ESTILOS DEL MENÚ RESPONSIVO          ==== */
+/* ================================================= */
+
+/* 1. El botón hamburguesa (oculto en escritorio) */
+.nav-toggle {
+    display: none; /* Oculto por defecto en pantallas grandes */
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: relative; /* Para posicionar las líneas */
+    width: 40px;
+    height: 40px;
+    z-index: 200; /* Asegura que esté por encima de todo */
+}
+
+/* Las 3 líneas del ícono (creadas con CSS) */
+.nav-toggle::before,
+.nav-toggle::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    width: 30px;
+    height: 3px;
+    background-color: var(--color-primario);
+    transition: transform 0.3s ease;
+}
+
+.nav-toggle::before {
+    transform: translateY(-8px); /* Línea de arriba */
+}
+
+.nav-toggle::after {
+    transform: translateY(8px); /* Línea de abajo */
+}
+
+/* Animación a 'X' cuando el menú está abierto */
+/* (La clase .nav-open la pondremos con JS en el <body>) */
+.nav-open .nav-toggle::before {
+    transform: rotate(45deg) translateY(0);
+}
+
+.nav-open .nav-toggle::after {
+    transform: rotate(-45deg) translateY(0);
+}
+
+
+/* 2. Media Query: Aquí ocurre la magia (para móviles) */
+/* Cuando la pantalla sea más pequeña de 768px... */
+@media (max-width: 768px) {
+    
+    /* Muestra el botón hamburguesa */
+    .nav-toggle {
+        display: block;
+    }
+
+    /* Oculta la lista de enlaces horizontal original */
+    header nav ul {
+        display: none;
+    }
+
+    /* 3. Estilo del menú vertical (oculto por defecto) */
+    #nav-menu {
+        display: flex; /* Lo cambiamos a flex para centrar */
+        flex-direction: column; /* Apila los enlaces */
+        justify-content: center; /* Centra verticalmente */
+        align-items: center; /* Centra horizontalmente */
+        
+        /* Ocupa toda la pantalla */
+        position: fixed;
+        top: 0;
+        right: -100%; /* Empieza fuera de la pantalla a la derecha */
+        
+        width: 100%;
+        height: 100vh; /* 100% de la altura de la pantalla */
+        
+        background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco semi-transparente */
+        backdrop-filter: blur(5px);
+        
+        z-index: 150; /* Debajo del botón 'X' pero encima del resto */
+        transition: right 0.4s ease-in-out; /* Animación de deslizamiento */
+    }
+
+    /* 4. La clase "show" que añadirá el JavaScript */
+    /* Esta clase hace visible el menú */
+    #nav-menu.nav-menu-visible {
+        right: 0; /* Lo desliza a la vista */
+    }
+
+    /* 5. Estilos de los enlaces dentro del menú móvil */
+    #nav-menu li {
+        margin: 25px 0; /* Espacio entre enlaces */
+    }
+    
+    #nav-menu li a {
+        font-size: 1.5rem; /* Letra más grande */
+        color: var(--color-primario); /* Color primario */
+    }
+
+    /* Le quitamos los estilos de "hover" de escritorio */
+    #nav-menu li a:hover,
+    #nav-menu li a.active {
+        background-color: transparent; 
+        color: var(--color-texto);
+    }
+}
+
