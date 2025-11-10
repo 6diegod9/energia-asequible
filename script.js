@@ -1,13 +1,65 @@
-// Espera a que todo el contenido de la página se cargue
+// ===================================================
+// ==== LÓGICA DEL TEMA (MODO OSCURO) ====
+// Esto se ejecuta ANTES para evitar "parpadeos"
+// ===================================================
+
+// 1. Función para aplicar el tema
+function aplicarTema(tema) {
+    if (tema === 'dark') {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+}
+
+// 2. Función para obtener el tema guardado o del sistema
+function obtenerTema() {
+    // A. Revisa si el usuario ya eligió un tema y lo guardó
+    const temaGuardado = localStorage.getItem('theme');
+    if (temaGuardado) {
+        return temaGuardado;
+    }
+    
+    // B. Si no, revisa la preferencia de su sistema operativo
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+    }
+    
+    // C. Si no, el default es 'light'
+    return 'light';
+}
+
+// 3. Aplica el tema tan pronto como sea posible
+const temaActual = obtenerTema();
+aplicarTema(temaActual);
+
+
+// ===================================================
+// ==== EL RESTO DE TU CÓDIGO (CUANDO LA PÁGINA CARGA) ====
+// ===================================================
+
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- Lógica del botón de Tema ---
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            // Revisa si el body YA tiene la clase .dark-mode
+            let esDark = document.body.classList.contains('dark-mode');
+            
+            // Si es dark, lo cambiamos a light. Si es light, a dark.
+            if (esDark) {
+                aplicarTema('light');
+                localStorage.setItem('theme', 'light'); // Guarda la preferencia
+            } else {
+                aplicarTema('dark');
+                localStorage.setItem('theme', 'dark'); // Guarda la preferencia
+            }
+        });
+    }
+
     // --- SECCIÓN DE LA CALCULADORA ---
-    
-    // Obtenemos los elementos de la calculadora
     const kwhInput = document.getElementById('kwh-input');
-    
-    // ¡IMPORTANTE! 
-    // Solo ejecutamos el código de la calculadora si el input existe en esta página
     if (kwhInput) {
         // Obtenemos el resto de elementos
         const ahorroOutput = document.getElementById('ahorro-output');
@@ -15,13 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const donutChart = document.getElementById('donut-chart');
         const ahorroPercent = document.getElementById('ahorro-percent');
 
-        // Constantes (ajústalas si es necesario)
-        // (Estos son los valores mejorados que investigamos)
-        const PRECIO_KWH = 4.2; 
-        const EMISIONES_KWH = 0.45;
-        const PORCENTAJE_AHORRO_SOLAR = 0.95;
+        // Constantes (con datos de México)
+        const PRECIO_KWH = 4.2; // Promedio tarifa DAC
+        const EMISIONES_KWH = 0.45; // Factor de emisión MX
+        const PORCENTAJE_AHORRO_SOLAR = 0.95; // Ahorro del 95%
 
-        // Función que hace los cálculos
         function actualizarCalculadora() {
             const consumoMensualKwh = parseFloat(kwhInput.value) || 0;
             const ahorroEnKwh = consumoMensualKwh * PORCENTAJE_AHORRO_SOLAR;
@@ -54,16 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
         actualizarCalculadora();
     } // Fin del 'if (kwhInput)'
 
-
     // --- SECCIÓN DEL MENÚ DE NAVEGACIÓN ACTIVO ---
-    
     const navLinks = document.querySelectorAll('header nav ul li a');
     let currentPage = window.location.pathname.split('/').pop();
-    
     if (currentPage === '') {
         currentPage = 'index.html';
     }
-
     navLinks.forEach(link => {
         const linkPage = link.getAttribute('href');
         if (linkPage === currentPage) {
@@ -72,11 +118,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- FUNCIÓN DE AUDIO EN GALERÍA ---
-    
     if (currentPage === 'galeria.html') {
         const galleryItems = document.querySelectorAll('.gallery-item');
         let currentAudio = null; 
-
         galleryItems.forEach(item => {
             const audioPath = item.getAttribute('data-audio'); 
             if (audioPath) { 
@@ -96,25 +140,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     } // Fin del 'if (currentPage === 'galeria.html')'
-
     
-    // ===================================================
-    // ==== ¡NUEVO CÓDIGO PARA MENÚ HAMBURGUESA! ====
-    // ===================================================
-    
+    // --- CÓDIGO PARA MENÚ HAMBURGUESA ---
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
-
-    // Verificamos que los elementos existan
     if (navToggle && navMenu) {
-        
         navToggle.addEventListener('click', () => {
-            // Alterna (pone y quita) la clase 'nav-menu-visible' en el menú (ul)
             navMenu.classList.toggle('nav-menu-visible');
-            
-            // Alterna la clase 'nav-open' en el body (para la animación del botón a 'X')
             document.body.classList.toggle('nav-open');
         });
     } // Fin del 'if (navToggle && navMenu)'
 
-}); // <-- ESTE ES EL CIERRE DEL 'DOMContentLoaded'
+}); // Fin del 'DOMContentLoaded'
