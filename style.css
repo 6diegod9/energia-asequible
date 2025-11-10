@@ -3,8 +3,11 @@
     --color-primario: #2E7D32; /* Un verde para el tema de ecología */
     --color-secundario: #4CAF50;
     --color-texto: #333;
-    --color-fondo: #FFFFFF;
+    --color-fondo: #FFFFFF; /* Devuelto al blanco original */
     --color-fondo-alterno: #f4f7f6;
+    
+    /* TU NUEVA VARIABLE PARA EL HEADER (pon el color que te guste) */
+    --color-header: #222222; 
 }
 
 * {
@@ -14,9 +17,8 @@
 }
 
 html {
-    /* ¡Esto hace el scroll suave! */
     scroll-behavior: smooth;
-    scroll-padding-top: 70px; /* Evita que el header tape el título */
+    scroll-padding-top: 70px; 
 }
 
 body {
@@ -64,7 +66,7 @@ img, iframe {
 
 /* ======== HEADER Y NAVEGACIÓN ======== */
 header {
-    background-color: var(--color-fondo);
+    background-color: var(--color-header); /* <-- CORRECCIÓN APLICADA */
     border-bottom: 2px solid var(--color-fondo-alterno);
     padding: 15px 0;
     position: sticky; /* Menú fijo en la parte superior */
@@ -88,6 +90,7 @@ header .container {
 header nav ul {
     display: flex;
     list-style: none;
+    align-items: center; /* Centra el botón de tema */
 }
 
 header nav ul li {
@@ -109,7 +112,6 @@ header nav ul li a:hover {
     color: white;
 }
 
-/* Clase que se añadirá con JS al link activo */
 header nav ul li a.active {
     background-color: var(--color-primario);
     color: white;
@@ -117,7 +119,7 @@ header nav ul li a.active {
 
 /* ======== SECCIÓN INICIO (HERO) ======== */
 .full-height {
-    min-height: calc(100vh - 75px); /* Alto de pantalla menos el header */
+    min-height: calc(100vh - 75px); 
     display: flex;
     align-items: center;
 }
@@ -129,14 +131,14 @@ header nav ul li a.active {
 }
 
 .hero-image {
-    flex: 1; /* Ocupa la mitad del espacio */
+    flex: 1; 
 }
 .hero-image img {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .hero-info {
-    flex: 1; /* Ocupa la otra mitad */
+    flex: 1; 
 }
 .hero-info h2 {
     text-align: left;
@@ -146,7 +148,6 @@ header nav ul li a.active {
 /* ======== SECCIÓN GALERÍA ======== */
 .gallery-grid {
     display: grid;
-    /* 3 columnas en escritorio, 2 en tablet, 1 en móvil */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
 }
@@ -161,7 +162,7 @@ header nav ul li a.active {
 .gallery-item img {
     width: 100%;
     height: 220px;
-    object-fit: cover; /* Asegura que la imagen cubra el espacio */
+    object-fit: cover; 
     display: block;
 }
 
@@ -171,17 +172,27 @@ header nav ul li a.active {
     border: 0;
 }
 
-.gallery-item p {
-    text-align: center;
+/* MEJORA: Estilo para el primer <p> (título) */
+.gallery-item p:first-of-type {
     font-weight: 600;
-    padding: 15px;
+    font-size: 1.1rem;
+    padding: 15px 15px 5px 15px;
+    margin: 0;
+}
+
+/* MEJORA: Estilo para los <p> que vienen después (descripción) */
+.gallery-item p + p {
+    font-weight: normal;
+    font-size: 0.9rem;
+    color: #666;
+    padding: 0 15px 15px 15px;
     margin: 0;
 }
 
 /* ======== SECCIÓN CALCULADORA ======== */
 .calculator-layout {
     display: flex;
-    flex-wrap: wrap; /* Para que se vea bien en móviles */
+    flex-wrap: wrap; 
     align-items: center;
     gap: 40px;
 }
@@ -234,13 +245,11 @@ header nav ul li a.active {
     min-width: 300px;
 }
 
-/* Gráfico de dona (hecho con CSS) */
 #donut-chart {
     width: 250px;
     height: 250px;
     border-radius: 50%;
     position: relative;
-    /* Gradiente cónico: rojo de 0% a 100%, verde de 100% a 100% (estado inicial) */
     background: conic-gradient(#F44336 0% 100%, #4CAF50 100% 100%);
     transition: background 0.5s;
 }
@@ -250,7 +259,7 @@ header nav ul li a.active {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 180px; /* Esto crea el "agujero" */
+    width: 180px; 
     height: 180px;
     background: var(--color-fondo);
     border-radius: 50%;
@@ -289,7 +298,7 @@ header nav ul li a.active {
 /* ======== SECCIÓN DEUS (EQUIPO) ======== */
 .team-list {
     display: flex;
-    flex-wrap: wrap; /* Para que se adapte a móviles */
+    flex-wrap: wrap; 
     justify-content: center;
     gap: 30px;
     list-style: none;
@@ -303,7 +312,7 @@ header nav ul li a.active {
 .team-member img {
     width: 150px;
     height: 150px;
-    border-radius: 50%; /* Fotos redondas */
+    border-radius: 50%; 
     object-fit: cover;
     border: 4px solid var(--color-primario);
     margin-bottom: 10px;
@@ -324,100 +333,33 @@ footer {
 }
 
 /* ================================================= */
-/* ==== NUEVOS ESTILOS PARA index.html (INICIO) ==== */
+/* ==== ESTILOS PARA index.html (INICIO) ==== */
 /* ================================================= */
 
-/* ======== ESTILO PARA INVERTIR EL HERO-LAYOUT ======== */
 .hero-layout.reverse {
-    flex-direction: row-reverse; /* Invierte el orden de los elementos */
+    flex-direction: row-reverse; 
 }
 
-/* ======== AJUSTE PARA PÁRRAFOS JUSTIFICADOS ======== */
-/* Esto hará que tu texto se vea más ordenado en todas las secciones */
 .hero-info p {
     text-align: justify;
 }
 
-/* ======== AJUSTE PARA MÓVILES ======== */
-/* Esto asegura que en pantallas pequeñas, todo se apile correctamente */
-@media (max-width: 768px) {
-    .hero-layout, 
-    .hero-layout.reverse {
-        flex-direction: column; /* Apila imagen y texto verticalmente */
-        text-align: center;
-    }
-    
-    .hero-info h2 {
-        text-align: center; /* Centra los títulos en móvil */
-    }
-
-    .hero-info p {
-        /* En móvil, justificado se ve mal. Lo dejamos a la izquierda. */
-        text-align: left; 
-    }
-}
 /* ================================================= */
-/* ====         NUEVO ESTILO PARA BANNER         ==== */
+/* ==== ESTILOS DEL MENÚ RESPONSIVO (HAMBURGUESA) ==== */
 /* ================================================= */
 
-.banner-container {
-    width: 100%;
-    /* Define una altura máxima para que el banner no sea gigante */
-    max-height: 300px; 
-    overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde */
-   
-}
-
-/* Como tu header es 'sticky', si no ponemos el margin-top de arriba, 
-  el banner se esconderá detrás de él.
-  PERO, si NO quieres que el header sea 'sticky' (fijo al hacer scroll),
-  puedes hacer esto:
-  1. En el CSS, busca 'header' y borra la línea: position: sticky;
-  2. Borra el 'margin-top: 75px;' de la regla .banner-container de arriba.
-*/
-
-.banner-container img {
-    width: 100%;
-    height: 100%;
-    /* 'cover' asegura que la imagen llene el espacio, recortándose si es necesario */
-    object-fit: cover; 
-    display: block; /* Elimina un pequeño espacio fantasma debajo de la imagen */
-}
-
-
-/* ======== ESTILO PARA DESCRIPCIONES DE GALERÍA ======== */
-.gallery-item p {
-    font-weight: 600; /* El título (el primer <p>) será negrita */
-    font-size: 1.1rem;
-    padding: 15px 15px 5px 15px; /* Menos padding abajo */
-}
-
-/* Estilo para los párrafos que *siguen* al primero */
-.gallery-item p + p {
-    font-weight: normal; /* Texto normal, no negrita */
-    font-size: 0.9rem; /* Letra más pequeña */
-    color: #666; /* Un gris sutil */
-    padding: 0 15px 15px 15px; /* Padding solo abajo */
-}
-
-/* ================================================= */
-/* ====     ESTILOS DEL MENÚ RESPONSIVO          ==== */
-/* ================================================= */
-
-/* 1. El botón hamburguesa (oculto en escritorio) */
 .nav-toggle {
-    display: none; /* Oculto por defecto en pantallas grandes */
+    display: none; 
     background-color: transparent;
     border: none;
     cursor: pointer;
     padding: 10px;
-    position: relative; /* Para posicionar las líneas */
+    position: relative; 
     width: 40px;
     height: 40px;
-    z-index: 200; /* Asegura que esté por encima de todo */
+    z-index: 200; 
 }
 
-/* Las 3 líneas del ícono (creadas con CSS) */
 .nav-toggle::before,
 .nav-toggle::after {
     content: '';
@@ -430,15 +372,14 @@ footer {
 }
 
 .nav-toggle::before {
-    transform: translateY(-8px); /* Línea de arriba */
+    transform: translateY(-8px); 
 }
 
 .nav-toggle::after {
-    transform: translateY(8px); /* Línea de abajo */
+    transform: translateY(8px); 
 }
 
-/* Animación a 'X' cuando el menú está abierto */
-/* (La clase .nav-open la pondremos con JS en el <body>) */
+/* Animación a 'X' */
 .nav-open .nav-toggle::before {
     transform: rotate(45deg) translateY(0);
 }
@@ -448,107 +389,147 @@ footer {
 }
 
 
-/* 2. Media Query: Aquí ocurre la magia (para móviles) */
-/* Cuando la pantalla sea más pequeña de 768px... */
+/* ================================================= */
+/* ====      ESTILOS DEL BOTÓN DE TEMA ☀️/🌙     ==== */
+/* ================================================= */
+.theme-toggle-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem; 
+    padding: 0;
+    margin: 0;
+    transition: none; 
+}
+.theme-toggle-button:hover {
+    background: transparent;
+    transform: scale(1.1);
+}
+
+.icon-moon { display: none; }
+body.dark-mode .icon-sun { display: none; }
+body.dark-mode .icon-moon { display: block; }
+
+
+/* ================================================= */
+/* ====     AJUSTES PARA MÓVILES (MEDIA QUERIES)  ==== */
+/* ================================================= */
 @media (max-width: 768px) {
+    .hero-layout, 
+    .hero-layout.reverse {
+        flex-direction: column; 
+        text-align: center;
+    }
     
-    /* Muestra el botón hamburguesa */
+    .hero-info h2 {
+        text-align: center; 
+    }
+
+    .hero-info p {
+        text-align: left; 
+    }
+
+    /* Mostramos el botón hamburguesa */
     .nav-toggle {
         display: block;
     }
 
-    /* Oculta la lista de enlaces horizontal original */
+    /* Ocultamos el menú horizontal */
     header nav ul {
         display: none;
     }
 
-    /* 3. Estilo del menú vertical (oculto por defecto) */
+    /* Estilo del menú vertical (oculto) */
     #nav-menu {
-        display: flex; /* Lo cambiamos a flex para centrar */
-        flex-direction: column; /* Apila los enlaces */
-        justify-content: center; /* Centra verticalmente */
-        align-items: center; /* Centra horizontalmente */
-        
-        /* Ocupa toda la pantalla */
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center; 
         position: fixed;
         top: 0;
-        right: -100%; /* Empieza fuera de la pantalla a la derecha */
-        
+        right: -100%; 
         width: 100%;
-        height: 100vh; /* 100% de la altura de la pantalla */
-        
-        background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco semi-transparente */
+        height: 100vh; 
+        background-color: rgba(255, 255, 255, 0.95); 
         backdrop-filter: blur(5px);
-        
-        z-index: 150; /* Debajo del botón 'X' pero encima del resto */
-        transition: right 0.4s ease-in-out; /* Animación de deslizamiento */
+        z-index: 150; 
+        transition: right 0.4s ease-in-out; 
     }
 
-    /* 4. La clase "show" que añadirá el JavaScript */
-    /* Esta clase hace visible el menú */
+    /* Clase que lo hace visible */
     #nav-menu.nav-menu-visible {
-        right: 0; /* Lo desliza a la vista */
+        right: 0; 
     }
 
-    /* 5. Estilos de los enlaces dentro del menú móvil */
     #nav-menu li {
-        margin: 25px 0; /* Espacio entre enlaces */
+        margin: 25px 0; 
     }
     
     #nav-menu li a {
-        font-size: 1.5rem; /* Letra más grande */
-        color: var(--color-primario); /* Color primario */
+        font-size: 1.5rem; 
+        color: var(--color-primario); 
     }
 
-    /* Le quitamos los estilos de "hover" de escritorio */
     #nav-menu li a:hover,
     #nav-menu li a.active {
         background-color: transparent; 
         color: var(--color-texto);
     }
+    
+    /* Botón de tema en menú móvil */
+    .nav-theme-toggle {
+        margin-left: 0;
+    }
+    .theme-toggle-button {
+        font-size: 2rem; 
+    }
 }
 
 
 /* ================================================= */
-/* ====         MODO OSCURO AUTOMÁTICO         ==== */
+/* ====   MODO OSCURO MANUAL (CON CLASE .dark-mode) ==== */
 /* ================================================= */
 
-@media (prefers-color-scheme: dark) {
+body.dark-mode {
+    /* 1. Redefinimos las variables de color */
+    --color-primario: #4CAF50;
+    --color-secundario: #2E7D32;
+    --color-texto: #e0e0e0;
+    --color-fondo: #1e1e1e;
+    --color-fondo-alterno: #2a2a2a;
     
-    /* 1. Invertimos los colores principales de tu :root */
-    :root {
-        --color-primario: #4CAF50; /* Hacemos el verde más brillante para que se lea */
-        --color-secundario: #2E7D32; /* (Este se queda igual o puede oscurecerse) */
-        
-        --color-texto: #e0e0e0;          /* Texto se vuelve claro */
-        --color-fondo: #0F0F0F;          /* Fondo se vuelve oscuro */
-        --color-fondo-alterno: #2a2a2a; /* Fondo alterno se vuelve un gris oscuro */
-    }
-
-    /* 2. Arreglamos elementos que tenían colores fijos (blancos) */
-    
-    /* Bordes claros que se verían mal en fondo oscuro */
-    .gallery-item {
-        border: 1px solid #444; /* Borde gris oscuro */
-    }
-    .results {
-        border: 1px solid #444;
-    }
-
-    /* Estilos del formulario de la calculadora */
-    .calculator-controls input {
-        background-color: #2a2a2a; /* Fondo oscuro para el input */
-        border: 2px solid #555;
-        color: #e0e0e0; /* Color del texto que escribes */
-    }
-
-    /* Fondo del menú de hamburguesa en móvil (que era blanco) */
-    #nav-menu {
-        background-color: rgba(30, 30, 30, 0.95); /* Fondo oscuro traslúcido */
-    }
-    
-    /* Tu pie de página (footer) ya es oscuro, 
-       así que no necesitamos tocarlo. ¡Perfecto!
-    */
+    /* CORRECCIÓN: Hacemos el header oscuro en modo oscuro */
+    --color-header: #1e1e1e;
 }
 
+/* 2. Arreglamos los elementos que no dependen de variables */
+body.dark-mode .gallery-item {
+    border: 1px solid #444;
+}
+body.dark-mode .results {
+    border: 1px solid #444;
+}
+body.dark-mode .calculator-controls input {
+    background-color: #2a2a2a;
+    border: 2px solid #555;
+    color: #e0e0e0;
+}
+body.dark-mode #nav-menu {
+    background-color: rgba(30, 30, 30, 0.95);
+}
+body.dark-mode header nav ul li a.active {
+    background-color: var(--color-primario);
+    color: white;
+}
+body.dark-mode .chart-center {
+    background: var(--color-fondo); /* Arreglo para el gráfico */
+}
+
+/* En modo oscuro, el hover del menú móvil es diferente */
+@media (max-width: 768px) {
+    body.dark-mode #nav-menu li a:hover,
+    body.dark-mode #nav-menu li a.active {
+        background-color: transparent;
+        color: #e0e0e0;
+    }
+}
