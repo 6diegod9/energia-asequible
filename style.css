@@ -521,7 +521,7 @@ footer {
         --color-secundario: #2E7D32; /* (Este se queda igual o puede oscurecerse) */
         
         --color-texto: #e0e0e0;          /* Texto se vuelve claro */
-        --color-fondo: #1e1e1e;          /* Fondo se vuelve oscuro */
+        --color-fondo: #0F0F0F;          /* Fondo se vuelve oscuro */
         --color-fondo-alterno: #2a2a2a; /* Fondo alterno se vuelve un gris oscuro */
     }
 
@@ -551,3 +551,4 @@ footer {
        así que no necesitamos tocarlo. ¡Perfecto!
     */
 }
+
